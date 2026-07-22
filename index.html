@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mariel ✨</title>
+    <style>
+        :root { --primary: #e11d48; --text: #4c0519; --bg: #fff1f2; }
+        body { margin: 0; padding: 0; font-family: 'Georgia', serif; background: var(--bg); color: var(--text); text-align: center; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        .container { width: 90%; max-width: 650px; padding: 40px; background: white; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); transition: opacity 0.5s ease; }
+        .hidden { display: none; opacity: 0; }
+        h1 { font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
+        p { font-size: 1.3rem; line-height: 1.8; margin-bottom: 25px; color: #5a1024; }
+        button { background: var(--primary); color: white; border: none; padding: 18px 40px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 10px; font-weight: bold; }
+        button:hover { transform: scale(1.05); background: #be123c; }
+        .foto-nosotros { max-width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px 0; border: 6px solid white; }
+        .heart { position: absolute; color: var(--primary); font-size: 25px; pointer-events: none; animation: float 4s linear infinite; z-index: -1; }
+        @keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- Inicio: Bienvenida -->
+    <div class="container" id="section1">
+        <h1>Hola, Mariel ✨</h1>
+        <p>A veces, las palabras que más importan son las que requieren un espacio especial para ser dichas.</p>
+        <p>He preparado este pequeño rincón digital porque quiero recordarte, una vez más, lo inmensamente importante que eres para mí.</p>
+        <button onclick="iniciarExperiencia()">Entrar a nuestro mundo</button>
+    </div>
+
+    <!-- Sección 2: Nuestra Historia -->
+    <div class="container hidden" id="section2">
+        <h1>Nuestra Historia</h1>
+        <img src="nosotros.jpg" alt="Nosotros dos" class="foto-nosotros">
+        <p>Todo empezó en aquel enero de 2021. Mirar atrás y ver cómo hemos crecido juntos desde entonces me hace darme cuenta de que encontrarte no fue suerte, fue el mejor regalo del destino.</p>
+        <p>Esta es nuestra canción, la que me acompaña en los buenos y malos momentos, la que me hace pensar en ti constantemente.</p>
+        
+        <!-- Reproductor de Spotify con tu link -->
+        <iframe id="spotify-player" style="border-radius:12px" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+        <button onclick="siguiente(3)">Sigue leyendo, mi amor</button>
+    </div>
+
+    <!-- Sección 3: El mensaje profundo -->
+    <div class="container hidden" id="section3">
+        <h1>Mariel, mi vida</h1>
+        <p>Escuchar "Mientras me curo del cora" me recuerda que la vida es un proceso, pero también me enseña que sanar, reír y vivir es infinitamente mejor cuando estás tú conmigo.</p>
+        <p>Gracias por ser mi refugio, por tu paciencia, por tu risa y por construir conmigo este camino que empezó hace ya tiempo.</p>
+        <p>No hay un día en que no agradezca haberte conocido. Eres mi paz, mi alegría y mi motivación constante.</p>
+        <button onclick="crearCorazones()">¡Te amo infinitamente!</button>
+    </div>
+
+    <script>
+        function iniciarExperiencia() {
+            // Convertimos tu link a formato embed y añadimos autoplay
+            const spotifyUrl = "https://open.spotify.com/embed/track/6otePxalBK8AVa20xhZYVQ?utm_source=generator&autoplay=1";
+            document.getElementById('spotify-player').src = spotifyUrl;
+            siguiente(2);
+        }
+
+        function siguiente(id) {
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
+            const nextSection = document.getElementById('section' + id);
+            nextSection.classList.remove('hidden');
+            void nextSection.offsetWidth;
+            nextSection.style.opacity = 1;
+        }
+
+        function crearCorazones() {
+            event.target.innerText = "❤️ ❤️ ❤️";
+            for(let i = 0; i < 60; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+    </script>
+</body>
+</html>
