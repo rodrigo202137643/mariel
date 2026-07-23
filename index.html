@@ -160,10 +160,9 @@
     </div>
   </div>
 
-  <!-- Audio nativo con la canción Blue de Yung Kai de fondo (sin el cuadro de Spotify) -->
+  <!-- Audio de fondo continuo sin cuadros de Spotify -->
   <audio id="background-audio" loop preload="auto">
-    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/audio_file/yung_kai_blue.mp3" type="audio/mpeg">
-    <!-- Enlace alternativo directo a un archivo de audio limpio si prefieres cambiarlo -->
+    <source src="https://cdns-preview-d.dzcdn.net/stream/c-deda72517173e3522f676239169a9975-3.mp3" type="audio/mpeg">
   </audio>
 
   <svg width="100" height="100" viewBox="0 0 100 100">
@@ -181,7 +180,7 @@
       if (animacionIniciada) return;
       animacionIniciada = true;
 
-      // Reproducir audio nativo de fondo
+      // Inicia la música de fondo en segundo plano limpiamente
       backgroundAudio.play().catch(error => {
         console.log("Audio play blocked:", error);
       });
