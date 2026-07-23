@@ -78,7 +78,7 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 2s ease;
-      background: radial-gradient(circle, rgba(255,42,95,0.22) 0%, rgba(0,0,0,0.92) 80%);
+      background: radial-gradient(circle, rgba(255,42,95,0.2) 0%, rgba(0,0,0,0.92) 80%);
     }
 
     .polaroid-grande {
@@ -167,9 +167,9 @@
     </div>
   </div>
 
-  <!-- Audio directo con alta compatibilidad y volumen máximo -->
+  <!-- Audio estable con enlace directo asegurado y volumen al máximo -->
   <audio id="background-audio" loop preload="auto">
-    <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-story-112159.mp3" type="audio/mpeg">
   </audio>
 
   <svg width="100" height="100" viewBox="0 0 100 100">
@@ -187,10 +187,10 @@
       if (animacionIniciada) return;
       animacionIniciada = true;
 
-      // Reproducción asegurada y con volumen al 100%
+      // Activación explícita de audio al interactuar con la pantalla
       backgroundAudio.volume = 1.0;
       backgroundAudio.play().catch(error => {
-        console.log("Audio play error:", error);
+        console.log("Error al reproducir audio:", error);
       });
 
       overlay.style.opacity = 0;
@@ -204,7 +204,7 @@
 
     const scene = new THREE.Scene();
     const isMobile = window.innerWidth < 768;
-    const cameraZ = isMobile ? 120 : 85; // Cámara mucho más cerca para impactar visualmente
+    const cameraZ = isMobile ? 115 : 80; // Posición de cámara cercana para un impacto visual total
     
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = cameraZ;
@@ -219,28 +219,28 @@
     const vertices = [];
     const tl = gsap.timeline({ paused: true });
 
-    const step = isMobile ? 0.045 : 0.025; // Muchísimas más partículas para que se vea denso y brillante
+    const step = isMobile ? 0.04 : 0.02; // Alta densidad de partículas para máxima definición
     for (let i = 0; i < length; i += step) { 
       const point = path.getPointAtLength(i);
       
-      const scaleSVG = 1.85; // Corazón de mayor tamaño
+      const scaleSVG = 1.9; // Tamaño ampliado del corazón
       const targetX = (point.x - 50) * scaleSVG;
       const targetY = -((point.y - 50) * scaleSVG);
       const targetZ = 0;
 
       const vector = new THREE.Vector3(
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 250
+        (Math.random() - 0.5) * 220,
+        (Math.random() - 0.5) * 220,
+        (Math.random() - 0.5) * 280
       );
       
       vertices.push(vector);
 
       tl.to(vector, {
-        x: targetX + (Math.random() - 0.5) * 1.2,
-        y: targetY + (Math.random() - 0.5) * 1.2,
-        z: targetZ + (Math.random() - 0.5) * 5,
-        duration: "random(2.0, 3.8)",
+        x: targetX + (Math.random() - 0.5) * 1.0,
+        y: targetY + (Math.random() - 0.5) * 1.0,
+        z: targetZ + (Math.random() - 0.5) * 4,
+        duration: "random(1.8, 3.5)",
         ease: "power3.inOut"
       }, i * 0.0003);
     }
@@ -250,8 +250,8 @@
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({ 
-      color: 0xff1654, // Rojo brillante e intenso
-      size: isMobile ? 2.8 : 2.1, // Partículas notablemente más grandes
+      color: 0xff0055, // Tono rojo fucsia hiperbrillante
+      size: isMobile ? 3.0 : 2.3, // Partículas de gran tamaño para resaltar de inmediato
       transparent: true, 
       opacity: 1.0,
       blending: THREE.AdditiveBlending,
@@ -271,8 +271,8 @@
     let targetRotationY = 0;
 
     window.addEventListener('mousemove', (event) => {
-      mouseX = (event.clientX - window.innerWidth / 2) * 0.0009;
-      mouseY = (event.clientY - window.innerHeight / 2) * 0.0009;
+      mouseX = (event.clientX - window.innerWidth / 2) * 0.001;
+      mouseY = (event.clientY - window.innerHeight / 2) * 0.001;
     });
 
     window.addEventListener('touchmove', (event) => {
@@ -308,7 +308,7 @@
 
     window.addEventListener('resize', () => {
       const mobileCheck = window.innerWidth < 768;
-      camera.position.z = mobileCheck ? 120 : 85;
+      camera.position.z = mobileCheck ? 115 : 80;
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
