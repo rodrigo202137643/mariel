@@ -167,9 +167,9 @@
     </div>
   </div>
 
-  <!-- Audio configurado con la canción Blue de Yung Kai -->
+  <!-- Llama al archivo local de música para garantizar que funcione -->
   <audio id="background-audio" loop preload="auto">
-    <source src="https://cdns-preview-d.dzcdn.net/stream/c-deda72517173e3522f676239169a9975-3.mp3" type="audio/mpeg">
+    <source src="blue.mp3" type="audio/mpeg">
   </audio>
 
   <svg width="100" height="100" viewBox="0 0 100 100">
@@ -222,7 +222,8 @@
     for (let i = 0; i < length; i += step) { 
       const point = path.getPointAtLength(i);
       
-      const scaleSVG = 1.9;
+      // Tamaño del corazón ajustado para ser un poco más pequeño (bajó de 1.9 a 1.55)
+      const scaleSVG = 1.55; 
       const targetX = (point.x - 50) * scaleSVG;
       const targetY = -((point.y - 50) * scaleSVG);
       const targetZ = 0;
@@ -250,7 +251,7 @@
 
     const material = new THREE.PointsMaterial({ 
       color: 0xff0055,
-      size: isMobile ? 3.0 : 2.3,
+      size: isMobile ? 2.5 : 1.8, // Partículas ajustadas en proporción al nuevo tamaño
       transparent: true, 
       opacity: 1.0,
       blending: THREE.AdditiveBlending,
